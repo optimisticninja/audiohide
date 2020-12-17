@@ -19,7 +19,7 @@ from Crypto.Util import Counter
 
 SALT_BYTES = 8
 KEY_BYTES = 32
-ACCEPTED_FORMATS = [".mp3", ".flac", ".ogg"]
+ACCEPTED_FORMATS = [".m4a", ".mp3", ".flac", ".ogg"]
 
 
 def decode(filename):
