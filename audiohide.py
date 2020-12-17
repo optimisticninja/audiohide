@@ -19,6 +19,7 @@ from Crypto.Util import Counter
 
 SALT_BYTES = 8
 KEY_BYTES = 32
+ACCEPTED_FORMATS = [".mp3", ".flac", ".ogg"]
 
 
 def decode(filename):
@@ -44,10 +45,8 @@ def decode(filename):
                 of.setnchannels(f.channels)
                 of.setframerate(f.samplerate)
                 of.setsampwidth(2)
-
                 for buf in f:
                     of.writeframes(buf)
-
     except audioread.DecodeError:
         print("File could not be decoded.", file=sys.stderr)
         sys.exit(1)
@@ -308,6 +307,9 @@ if __name__ == "__main__":
                 parser.exit(-1, "ERROR: file '{}' does not exist".format(argparse_namespace.steg))
             if not os.path.isfile(argparse_namespace.input_file):
                 parser.exit(-1, "ERROR: file '{}' does not exist".format(argparse_namespace.input_file))
+            _, extension = os.path.splitext(argparse_namespace.steg)
+            if extension not in ACCEPTED_FORMATS:
+                parser.exit(-1, "ERROR: '*{}' files not supported".format(extension))
             print("Decoding file to PCM...")
             wav_filename = decode(argparse_namespace.steg)
             print("Stegging '%s' into '%s'..." % (argparse_namespace.input_file, argparse_namespace.output_file))
