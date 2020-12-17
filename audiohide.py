@@ -257,7 +257,6 @@ def unsteg(audio_file, password):
     buffer_length = 0
 
     while bytes_to_recover > 0:
-
         next_sample = raw_data[sound_index]
         if next_sample != min_sample:
             # Since we skipped samples with the minimum possible value when
@@ -277,6 +276,7 @@ def unsteg(audio_file, password):
 
     data = decrypt(password, iv, salt, bytes(data))
 
+    # Hash data and verify
     hash = sha256()
     hash.update(data)
     digest = hash.digest()
