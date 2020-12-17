@@ -1,19 +1,19 @@
 import argparse
 import binascii
 import contextlib
-from hashlib import sha256
 import math
 import os
 import struct
 import sys
 import wave
+from hashlib import sha256
 
 import audioread
+import taglib
 from Crypto import Random
 from Crypto.Cipher import AES
 from Crypto.Protocol.KDF import PBKDF2
 from Crypto.Util import Counter
-import taglib
 
 SALT_BYTES = 8
 KEY_BYTES = 32
@@ -309,7 +309,8 @@ if __name__ == "__main__":
             print("Decoding file to PCM...")
             wav_filename = decode(argparse_namespace.steg)
             print("Stegging '%s' into '%s'..." % (argparse_namespace.input_file, argparse_namespace.output_file))
-            steg(wav_filename, argparse_namespace.input_file, argparse_namespace.password, argparse_namespace.output_file)
+            steg(wav_filename, argparse_namespace.input_file, argparse_namespace.password,
+                 argparse_namespace.output_file)
     if argparse_namespace.unsteg:
         if not os.path.isfile(argparse_namespace.unsteg):
             parser.exit(-1, "ERROR: file '{}' does not exist".format(argparse_namespace.unsteg))
