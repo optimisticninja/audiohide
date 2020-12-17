@@ -7,6 +7,7 @@ import math
 import os
 import struct
 import sys
+import tempfile
 import wave
 from hashlib import sha256
 
@@ -40,7 +41,7 @@ def decode(filename):
             print('Backend:', str(type(f).__module__).split('.')[1],
                   file=sys.stderr)
 
-            output_filename = filename + '.wav'
+            output_filename = tempfile.gettempdir() + "/" + os.path.basename(filename) + '.wav'
             with contextlib.closing(wave.open(output_filename, 'w')) as of:
                 of.setnchannels(f.channels)
                 of.setframerate(f.samplerate)
