@@ -1,6 +1,6 @@
 # audiohide
 
-`audiohide` is a CLI utility to hide files in audio files. Supports `flac`, `ogg`, and `mp3`, and `m4a`. It 
+`audiohide` is a CLI utility to hide files in audio files. Supports `flac`, `ogg`, `mp3`, and `m4a`. It 
 will output the stegged file as `wav`. Outputting as `wav` doesn't lose quality on recompressing lossy formats.
 
 ## How it Works
